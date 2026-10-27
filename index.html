@@ -1,174 +1,25 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="mn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b3567">
-  <title>52-р сургууль | МХХТ-ийн шалгалт</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>52-р сургууль | МХХТ-ийн шалгалт</title><link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">52</div>
-      <div>
-        <strong>52-р сургууль</strong>
-        <span>Мэдээлэл технологийн шалгалтын систем</span>
-      </div>
-    </div>
-    <span class="tag">10-р анги · МХХТ</span>
-  </header>
-
-  <main class="container">
-    <section id="loginPanel" class="panel login-panel">
-      <p class="eyebrow">ОНЛАЙН ШАЛГАЛТ</p>
-      <h1>HTML · CSS · JavaScript</h1>
-      <p class="muted">10 асуулт · 40 минут</p>
-
-      <div class="field">
-        <label for="studentName">Сурагчийн овог, нэр</label>
-        <input id="studentName" placeholder="Жишээ: Бат Болд"
-          maxlength="100" autocomplete="name">
-      </div>
-
-      <div class="field">
-        <label for="studentClass">Анги</label>
-        <select id="studentClass">
-          <option value="">Ангиа сонгоно уу</option>
-          <option>10А</option>
-          <option>10Б</option>
-          <option>10В</option>
-          <option>10Г</option>
-          <option>10Д</option>
-        </select>
-      </div>
-
-      <button id="startBtn" class="primary">Шалгалт эхлүүлэх</button>
-      <p id="loginMessage" class="message" role="status"></p>
-    </section>
-
-    <section id="examPanel" class="hidden">
-      <div class="panel exam-head">
-        <div>
-          <p class="eyebrow">МХХТ · 10-Р АНГИ</p>
-          <h1>Шалгалт</h1>
-          <p id="studentLabel" class="muted"></p>
-        </div>
-        <div class="timer-box">
-          <span>Үлдсэн хугацаа</span>
-          <strong id="timer">40:00</strong>
-        </div>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-label">
-          <span>Хариулсан асуулт</span>
-          <strong id="progressText">0 / 10</strong>
-        </div>
-        <div class="progress"><div id="progressBar"></div></div>
-      </div>
-
-      <form id="examForm">
-        <div id="questionList"></div>
-        <button class="primary" type="submit">Шалгалт дуусгах</button>
-      </form>
-      <p id="examMessage" class="message" role="status"></p>
-    </section>
-
-    <section id="resultPanel" class="panel hidden">
-      <p class="eyebrow">ТАНЫ ҮР ДҮН</p>
-      <h1 id="resultTitle">Шалгалт дууслаа</h1>
-      <div class="score-circle">
-        <strong id="scorePercent">0%</strong>
-        <span>авсан хувь</span>
-      </div>
-
-      <div class="stats">
-        <div><strong id="correctCount">0/10</strong><span>Зөв хариулт</span></div>
-        <div><strong id="grade">F</strong><span>Үнэлгээ</span></div>
-      </div>
-
-      <p id="saveMessage" class="message"></p>
-      <button id="backBtn" class="secondary">Эхлэл рүү буцах</button>
-    </section>
-
-    <section id="dashboardPanel" class="panel">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">ШАЛГАЛТЫН ТАЙЛАН</p>
-          <h2>Дүнгийн самбар</h2>
-        </div>
-        <button id="refreshBtn" class="secondary small">Шинэчлэх</button>
-      </div>
-
-      <div class="stats dashboard-stats">
-        <div><strong id="totalStudents">0</strong><span>Шалгалт өгсөн</span></div>
-        <div><strong id="averageScore">0%</strong><span>Дундаж оноо</span></div>
-        <div><strong id="over80">0</strong><span>80% ба түүнээс дээш</span></div>
-      </div>
-
-      <p id="dashboardMessage" class="message">Дүн ачаалж байна...</p>
-
-      <div class="chart-card">
-        <h3>Сурагчдын оноо</h3>
-        <canvas id="scoreChart" height="180"></canvas>
-      </div>
-
-      <div class="chart-card">
-        <h3>Үнэлгээний тархалт</h3>
-        <canvas id="gradeChart" height="180"></canvas>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Огноо</th>
-              <th>Сурагч</th>
-              <th>Анги</th>
-              <th>Зөв</th>
-              <th>Хувь</th>
-              <th>Үнэлгээ</th>
-            </tr>
-          </thead>
-          <tbody id="resultsBody"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <details class="panel admin-panel">
-      <summary>Багш / админ — дахин шалгалтын эрх нээх</summary>
-      <p class="muted">Өмнө шалгалт өгсөн сурагчид нэг удаагийн эрх нээнэ.</p>
-
-      <div class="field">
-        <label for="adminName">Сурагчийн овог, нэр</label>
-        <input id="adminName" placeholder="Бат Болд" maxlength="100">
-      </div>
-
-      <div class="field">
-        <label for="adminClass">Анги</label>
-        <select id="adminClass">
-          <option value="">Анги сонгоно уу</option>
-          <option>10А</option><option>10Б</option>
-          <option>10В</option><option>10Г</option><option>10Д</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="adminPin">Админы нууц код</label>
-        <input id="adminPin" type="password" inputmode="numeric"
-          maxlength="4" placeholder="4 оронтой код" autocomplete="off">
-      </div>
-
-      <button id="grantBtn" class="primary">Дахин шалгалтын эрх нээх</button>
-      <p id="adminMessage" class="message" role="status"></p>
-    </details>
-
-    <footer>52-р сургууль · Мэдээлэл зүйн хичээл</footer>
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+<body><main class="wrap">
+<header><div class="eyebrow">52-Р СУРГУУЛЬ · 10-Р АНГИ</div><h1>МХХТ-ийн онлайн шалгалт</h1><p>HTML · CSS · JavaScript</p></header>
+<section class="card" id="loginPanel"><h2>Шалгалтад нэвтрэх</h2>
+<label>Сурагчийн овог, нэр<input id="studentName" maxlength="100" placeholder="Жишээ: Бат Болд"></label>
+<label>Анги<select id="studentClass"><option value="">Анги сонгоно уу</option><option>10А</option><option>10Б</option><option>10В</option><option>10Г</option><option>10Д</option></select></label>
+<button id="startBtn">Шалгалт эхлүүлэх</button><p id="loginMessage" class="message"></p></section>
+<section class="card hidden" id="examPanel"><div class="examHead"><div><h2 id="examTitle">HTML · CSS · JavaScript</h2><p id="studentLabel"></p></div><strong class="timer" id="timer">40:00</strong></div>
+<div class="progress"><div id="progressBar"></div></div><p id="progressText">0 / 10 асуулт хариулсан</p>
+<form id="examForm"><div id="questions"></div><button id="submitBtn" type="submit">Шалгалт дуусгах</button></form><p id="examMessage" class="message"></p></section>
+<section class="card hidden" id="resultPanel"><h2>Шалгалтын дүн</h2><p id="resultText"></p><button id="homeBtn" class="light">Нүүр хуудас</button></section>
+<section class="card"><div class="examHead"><div><h2>Сурагчдын дүн</h2><p>Google Sheets-ээс уншина</p></div><button id="refreshBtn" class="light">Шинэчлэх</button></div>
+<div class="stats"><div><span>Шалгалт өгсөн</span><b id="count">—</b></div><div><span>Дундаж (%)</span><b id="average">—</b></div><div><span>80% ба дээш</span><b id="over80">—</b></div></div>
+<p id="dashboardMessage" class="message"></p><div class="tableWrap"><table><thead><tr><th>Огноо</th><th>Сурагч</th><th>Анги</th><th>Оноо</th><th>Хувь</th><th>Үнэлгээ</th></tr></thead><tbody id="resultsBody"><tr><td colspan="6">Дүн ачаалж байна...</td></tr></tbody></table></div></section>
+<section class="card"><details><summary>Багш / админы хэсэг — дахин шалгалтын эрх</summary><p class="muted">Өмнө шалгалт өгсөн сурагчид нэг удаагийн эрх олгоно.</p>
+<label>Админы PIN<input id="adminPin" type="password" inputmode="numeric" placeholder="Админы код"></label>
+<label>Сурагчийн овог, нэр<input id="retakeName" placeholder="Сурагчийн нэр"></label>
+<label>Анги<select id="retakeClass"><option value="">Анги сонгоно уу</option><option>10А</option><option>10Б</option><option>10В</option><option>10Г</option><option>10Д</option></select></label>
+<button id="grantBtn">Нэг удаагийн эрх нээх</button><p id="adminMessage" class="message"></p></details></section>
+<footer>52-р сургууль · Мэдээлэл технологийн шалгалтын систем</footer></main><script src="script.js"></script></body></html>
